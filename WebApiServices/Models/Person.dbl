@@ -1,0 +1,34 @@
+import System
+import System.Collections.Generic
+import System.Text
+import System.ComponentModel.DataAnnotations
+
+namespace WebApiServices.Models
+
+	;;; <summary>
+	;;; Represents a person
+	;;; </summary>
+	public class Person
+
+		;;; <summary>
+		;;; Person ID
+		;;; </summary>	
+		public readwrite property Id, int
+
+		;;; <summary>
+		;;; First name
+		;;; </summary>
+		{required}
+		{StringLength(15)}
+		public readwrite property FirstName, string  
+
+		;;; <summary>
+		;;; Last name
+		;;; </summary>
+		{required}
+		{StringLength(15)}
+		public readwrite property LastName,   string
+
+	endclass
+
+endnamespace

@@ -1,0 +1,33 @@
+import System
+import System.Collections.Generic
+import System.Text
+import System.Net.Http
+import System.Web.Http
+import System.Net
+import WebApiServices.Models
+
+
+namespace WebApiServices.Controllers
+
+	public partial class EmployeeController
+	
+		{Route("bornbefore/{year}")}
+		public method GetBornBeforeYear, @HttpResponseMessage
+			required in year, int
+		proc
+			data results, @List<Employee>
+
+			if (dataRepository.ReadBornBeforeYear(year,results) == RepositoryResult.NotFound)
+				mreturn Request.CreateResponse(HttpStatusCode.NotFound)
+
+			data response = Request.CreateResponse(HttpStatusCode.OK,results)
+			response.Headers.Add("ResultsCount",results.Count.ToString())
+
+			mreturn response
+
+		endmethod
+
+
+	endclass
+
+endnamespace

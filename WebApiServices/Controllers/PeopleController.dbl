@@ -1,0 +1,108 @@
+import System
+import System.Linq
+import System.Collections.Generic
+import System.Text
+import System.Web.Http
+import WebApiServices.Models
+import System.Net
+import System.Net.Http
+
+
+namespace WebApiServices.Controllers
+
+	;;; <summary>
+	;;; Exposes actions relating to people
+	;;; </summary>
+	public class PeopleController extends ApiController
+	
+		private static people, @List<Person>
+
+		public method PeopleController
+			endparams
+		proc
+			if (people == ^null)
+			begin
+				people = new List<Person>() { 
+				&	new Person() { ID=1, FirstName="John", LastName="Doe"},
+				&	new Person() { ID=2, FirstName="Jane", LastName="Doe"}
+				&}
+			End
+
+		endmethod
+
+		;;; <summary>
+		;;; Returns a collection of all people
+		;;; </summary>
+		public method Get, @IEnumerable<Person>
+		proc
+			mreturn people
+		endmethod
+
+		;;; <summary>
+		;;; Returns a single person
+		;;; </summary>
+		;;; <param name="id">Person ID</param>
+		;;; <returns></returns>
+		public method Get, @IHttpActionResult
+			required in id, int
+		proc
+			data p = people.FirstOrDefault(lambda (p) { p.Id == id }) 
+			if (p == ^null)
+				mreturn NotFound()
+			mreturn Ok(p)
+		endmethod
+
+		;;; <summary>
+		;;; 
+		;;; </summary>
+		;;; <param name="newPerson"></param>
+		;;; <returns></returns>
+		public method Post, @HttpResponseMessage
+			{FromBody}
+			required in newPerson, @Person 
+		proc
+			newPerson.ID = (people.Count > 0) ? people.OrderByDescending(lambda(p) {p.Id}).First().Id + 1 : 1
+			people.Add(newPerson)
+
+			data response = Request.CreateResponse(HttpStatusCode.Created)
+			response.Headers.Location = new Uri(String.Format("{0}/{1}",Request.RequestUri,newPerson.ID))
+
+			mreturn response
+
+		endmethod
+
+		;;; <summary>
+		;;; 
+		;;; </summary>
+		public method Put, @HttpResponseMessage
+			required in id, int
+			{FromBody}
+			required in updatedPerson, @Person
+		proc
+			data existingPerson = people.FirstOrDefault(lambda (p) { p.id == id })
+			if (existingPerson == ^null)
+				mreturn Request.CreateResponse(HttpStatusCode.NotFound)
+			updatedPerson.ID = id
+			people[people.IndexOf(existingPerson)] = updatedPerson
+			mreturn Request.CreateResponse(HttpStatusCode.NoContent)
+		endmethod
+
+		;;; <summary>
+		;;; 
+		;;; </summary>
+		;;; <param name="id"></param>
+		;;; <returns></returns>
+		public method Delete, @HttpResponseMessage
+			required in id, int 
+		proc
+			data personToDelete = people.FirstOrDefault(lambda (p) { p.Id == id })
+			if (personToDelete == ^null)
+				mreturn Request.CreateResponse(HttpStatusCode.NotFound)
+			people.Remove(personToDelete)
+			mreturn Request.CreateResponse(HttpStatusCode.NoContent)
+		endmethod
+
+
+	endclass
+
+endnamespace
