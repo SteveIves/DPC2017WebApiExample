@@ -15,7 +15,7 @@ namespace TestClientNet
 	public class EmployeeServiceClient 
 		
 		;; Define the base URL where the service is running
-		private const baseUrl, string, "http://localhost/WebServer/api/employee/"
+		private const baseUrl, string, "http://localhost/WebServer/api/employee"
 		
 		;;; <summary>
 		;;; A private helper method that can be used to call any GET operation that
@@ -28,7 +28,7 @@ namespace TestClientNet
 		proc
 			disposable data webclient = new HttpClient()
 			disposable data request = new HttpRequestMessage()
-			request.RequestUri = new Uri(String.Format("{0}{1}",baseUrl,url))
+			request.RequestUri = new Uri(String.Format("{0}/{1}",baseUrl,url))
 			request.Method = HttpMethod.Get
 			disposable data response = await webclient.SendAsync(request)
 
