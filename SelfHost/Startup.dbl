@@ -6,31 +6,40 @@ import System.Web.Http
 import WebApiServices
 import WebApiServices.Filters
 
-
 namespace SelfHost
 
+
+	;;; <summary>
+	;;; This is the OWIN startup class. OWIN will locate its startup class in one of three ways,
+	;;; one of which is by naming convention; it looks for a class named Startup in namespace
+	;;; matching the assembly name or the global namespace.
+	;;; Within the startup class there must be a public void method named Configuration that
+	;;; accepts an instance of @IAppBuilder that can be used to configure the Web API environment.
+	;;; For more information refer to https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/owin-startup-class-detection
+	;;; </summary>
 	public class Startup
-	
+
 		public method Configuration, void
-			required in appBuilder, @IappBuilder
+			required in appBuilder, @IAppBuilder
 			endparams
 		proc
-			;;  Configure Web API for self-host.
 			data config = new HttpConfiguration()
 
-			;;Implement a Unity IoC container
+			;; Implement a Unity IoC container
 			config.DependencyResolver = WebApiServicesConfig.GetUnityResolver()
 
-			;;Implement global model state validation
+			;; Implement global model state validation
 			config.Filters.Add(new ValidateModelAttribute())
 
-			;;Enable attribute-based routes
+			;; Enable attribute-based routes
 			config.MapHttpAttributeRoutes()
 
-
+			;; Configure the default routing rules
 			config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", RouteParameter.Optional)
 
+			;; Apply the configuration
 			appBuilder.UseWebApi(config)
+
 		endmethod
 
 	endclass

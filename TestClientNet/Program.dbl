@@ -1,63 +1,40 @@
-import WebApiServices.Models
+
 import System
-import System.Collections.Generic
-import System.Text
-import System.Net.Http
-import Newtonsoft.Json
-import System.Threading.Tasks
-import System.Net
+import WebApiServices.Models
 
 namespace TestClientNet
 
-    ;;; <summary>
-    ;;; The main entry point for the application.
-    ;;; </summary>
-    main
+	;;; <summary>
+	;;; This is an example of interacting with a simple Web API service from a Synergy .NET application.
+	;;; </summary>
+	main
 
     proc
 		data client = new EmployeeServiceClient()
-		data e, @Employee
 
-		;;Only do this in a console app!
+		;; NOTE: This pattern (Task.Wait) whould ONLY be used in the context of a single-threaded application
+		;; such as this console application. You should NEVER use code like this in a multi-threaded application.
+		;; Refer to the sample code in the TestClientWpf project for an example of a pattern to use in such applications.
+
+		;; Make the call to the web service
 		data thetask = client.GetEmployeesInState("CA")
+
+		;; And wait for the asynchronous operation to complete
 		thetask.Wait()
 
+		;; Iterate through the results
+		data e, @Employee
 		foreach e in thetask.Result
 			Console.WriteLine("{0} {1} {2}", e.ID, e.FirstName, e.LastName)
+
+		;; Display the number of retults
+		Console.WriteLine("")
+		Console.WriteLine("{0} matching employees",thetask.Result.Count)
 
 		Console.WriteLine("")
 		Console.Write("Press a key to terminate: ")
 		Console.ReadKey()
 
     endmain
-
-	public class EmployeeServiceClient 
-		
-		private const baseUrl, string, "http://localhost/WebServer/api/employee/"
-
-		private async method doGetMultiple, @Task<List<Employee>>
-			required in url, string
-		proc
-			disposable data webclient = new HttpClient()
-			disposable data request = new HttpRequestMessage()
-			request.RequestUri = new Uri(String.Format("{0}{1}",baseUrl,url))
-			request.Method = HttpMethod.Get
-			disposable data response = await webclient.SendAsync(request)
-
-			if (response.StatusCode == HttpStatusCode.NotFound)
-				mreturn new List<Employee>()
-
-			data json = await response.Content.ReadAsStringAsync()
-			mreturn JsonConvert.DeserializeObject<List<Employee>>(json)
-		endmethod
-
-		public async method GetEmployeesInState, @Task<List<Employee>>
-			required in state, string
-		proc
-			data url = String.Format("state/{0}",state)
-			mreturn await doGetMultiple(url)
-		endmethod
-
-	endclass
 
 endnamespace

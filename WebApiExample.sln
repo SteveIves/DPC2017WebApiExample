@@ -28,7 +28,7 @@ Project("{BBD0F5D1-1CC4-42FD-BA4C-A96779C64378}") = "TestClientNet", "TestClient
 EndProject
 Project("{BBD0F5D1-1CC4-42FD-BA4C-A96779C64378}") = "TestClientDBR", "TestClientDBR\TestClientDBR.synproj", "{1CB9830D-CC3E-42E1-B156-51343D7C5176}"
 EndProject
-Project("{BBD0F5D1-1CC4-42FD-BA4C-A96779C64378}") = "TestClientWpf", "WebApiWpfClient\TestClientWpf.synproj", "{77075869-87E4-440F-B5DC-D4FDAE640594}"
+Project("{BBD0F5D1-1CC4-42FD-BA4C-A96779C64378}") = "TestClientWpf", "TestClientWpf\TestClientWpf.synproj", "{77075869-87E4-440F-B5DC-D4FDAE640594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

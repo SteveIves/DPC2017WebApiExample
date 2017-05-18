@@ -12,8 +12,14 @@ namespace TestClientWpf
 		ZipCode
 	endenum
 
+	;;;	<summary>
+	;;; This is the main ViewModel that drives the sample application.
+	;;;	</summary>
 	public class EmployeesViewModel extends ViewModelBase
 	
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public method EmployeesViewModel
 		proc
 			SearchMode = EmployeeSearchMode.All
@@ -22,6 +28,9 @@ namespace TestClientWpf
 
 		private _SearchMode, EmployeeSearchMode
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property SearchMode, EmployeeSearchMode
 			method get
 			proc
@@ -38,6 +47,9 @@ namespace TestClientWpf
 
 		private _SearchText, string
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property SearchText, string
 			method get
 			proc
@@ -52,6 +64,9 @@ namespace TestClientWpf
 
 		private _SearchTextEnabled, Boolean, False
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property SearchTextEnabled, Boolean
 			method get
 			proc
@@ -66,6 +81,9 @@ namespace TestClientWpf
 
 		private _ResultsMessage, string, ""
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property ResultsMessage, string
 			method get
 			proc
@@ -80,6 +98,9 @@ namespace TestClientWpf
 		
 		private _Employees, @ObservableCollection<Employee>
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property Employees, @ObservableCollection<Employee>
 			method get
 			proc
@@ -96,6 +117,9 @@ namespace TestClientWpf
 
 		private _SelectedEmployee, @Employee
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property SelectedEmployee, @Employee
 			method get
 			proc
@@ -112,6 +136,9 @@ namespace TestClientWpf
 
 		private _SearchCommand, @ICommand
 
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		public property SearchCommand, @ICommand
 			method get
 			proc
@@ -121,6 +148,9 @@ namespace TestClientWpf
 			endmethod
 		endproperty
 		
+		;;;	<summary>
+		;;; 
+		;;;	</summary>
 		private async method doSearch, void
 			param, @Object
 		proc
@@ -165,7 +195,6 @@ namespace TestClientWpf
 			endusing
 			
 		endmethod
-
 
 	endclass
 

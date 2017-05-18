@@ -1,6 +1,6 @@
 
 ;;; <summary>
-;;; The main entry point for the application.
+;;; This is an example of interacting with a simple Web API service from traditional Synergy.
 ;;; </summary>
 main
 	.include "DBLDIR:synxml.def"
@@ -15,19 +15,24 @@ main
 proc
 	open(tt,i,"tt:")
 
+	;; Define request headers
 	sendHeaders = new string[2]
 	sendHeaders[1] = "Host: localhost"
 	sendHeaders[2] = "Accept: application/xml"
 
+	;; Make the HTTP GET request to the service
 	httpError = %http_get("http://localhost/WebServer/api/department/manager/1089",2,response,errorText,sendHeaders,receiveHeaders,"http.log",,,,,HTTP_RELURI,"1.1")
 
-	if (httpError) then
+	;; Did it work?
+	if (!httpError) then
 	begin
-		writes(tt,errorText)
+		;; Yes, display the data that came back in the response body
+		writes(tt,response)
 	end
 	else
 	begin
-		writes(tt,response)
+		;; No, display the error message
+		writes(tt,errorText)
 	end
 
 	writes(tt,"")

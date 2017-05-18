@@ -6,20 +6,28 @@ import Microsoft.Owin.Hosting
 namespace SelfHost
 
     ;;; <summary>
-    ;;; The main entry point for the application.
+    ;;; This is just a plain console application that contains an example of using OWIN
+	;;; (a.k.a Katana) to self-host Web API services. Using a console app is a quick
+	;;; and easy way to stage and test services during development, but it is more likely
+	;;; that you would host services in a Windows Service application.
+	;;; For more information refer to https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/an-overview-of-project-katana
     ;;; </summary>
     main
 
     proc
+		;; Define the base address to host the service at
 		data baseAddress, string, "http://localhost:8088/"
+
+		;; Start the service
 		disposable data app = WebApp.Start<Startup>(baseAddress)
 
+		;; This code is just here to ensure that the console app keeps running until a key
+		;; is pressed, at which time the service will stop.
 		Console.WriteLine("")
 		Console.WriteLine("The server is listening at a base address of {0}",baseAddress)
 		Console.WriteLine("")
 		Console.Write("Press a key to stop the server: ")
 		Console.ReadKey()
-
 
     endmain
 

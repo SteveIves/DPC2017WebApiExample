@@ -8,15 +8,28 @@ import Newtonsoft.Json
 
 namespace TestClientWpf
 
+	;;; <summary>
+	;;; This is an example of a class that implements client functionality to an Asp .NET Web API service.
+	;;; </summary>
 	public class EmployeeServiceClient
 
+		;; Define the base URL where the service is running
 		private const baseUrl, string, "http://localhost/WebServer/api/employee"
 
+		;;; <summary>
+		;;; Returns a collection of all employees.
+		;;; </summary>
+		;;; <returns>Collection of Employee objects</returns>
 		public async method GetAllEmployees, @Task<ObservableCollection<Employee>>
 		proc
 			mreturn await doGetMultiple(baseUrl)
 		endmethod
 
+		;;; <summary>
+		;;; Returns a collection of all employees with a specified last name.
+		;;; </summary>
+		;;; <param name="name">Last name to search for</param>
+		;;; <returns>Collection of Employee objects</returns>
 		public async method GetEmployeesByLastName, @Task<ObservableCollection<Employee>>
 			required in name, string
 		proc
@@ -24,6 +37,11 @@ namespace TestClientWpf
 			mreturn await doGetMultiple(url)
 		endmethod
 	
+		;;; <summary>
+		;;; Returns a collection of all employees in a specified state.
+		;;; </summary>
+		;;; <param name="state">Two-digit US state code</param>
+		;;; <returns>Collection of Employee objects</returns>
 		public async method GetEmployeesInState, @Task<ObservableCollection<Employee>>
 			required in state, string
 		proc
@@ -31,6 +49,11 @@ namespace TestClientWpf
 			mreturn await doGetMultiple(url)
 		endmethod
 	
+		;;; <summary>
+		;;; Returns a collection of all employees in a specified zip code.
+		;;; </summary>
+		;;; <param name="zip">Zip code to search for</param>
+		;;; <returns>Collection of Employee objects</returns>
 		public async method GetEmployeesInZipCode, @Task<ObservableCollection<Employee>>
 			required in zip, string
 		proc
@@ -38,6 +61,10 @@ namespace TestClientWpf
 			mreturn await doGetMultiple(url)
 		endmethod
 	
+		;;; <summary>
+		;;; A private helper method that can be used to call any GET operation that
+		;;; returns a collection of Employee objects.
+		;;; </summary>
 		private async method doGetMultiple, @Task<ObservableCollection<Employee>>
 			required in url, string
 		proc

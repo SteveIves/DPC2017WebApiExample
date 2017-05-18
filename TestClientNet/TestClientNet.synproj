@@ -50,6 +50,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeServiceClient.dbl" />
     <Compile Include="Properties\AssemblyInfo.dbl" />
     <Compile Include="Program.dbl" />
   </ItemGroup>

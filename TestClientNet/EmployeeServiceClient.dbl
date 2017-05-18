@@ -1,0 +1,57 @@
+
+import Newtonsoft.Json
+import System
+import System.Collections.Generic
+import System.Net
+import System.Net.Http
+import System.Threading.Tasks
+import WebApiServices.Models
+
+namespace TestClientNet
+
+	;;; <summary>
+	;;; This is an example of a class that implements client functionality to an Asp .NET Web API service.
+	;;; </summary>
+	public class EmployeeServiceClient 
+		
+		;; Define the base URL where the service is running
+		private const baseUrl, string, "http://localhost/WebServer/api/employee/"
+		
+		;;; <summary>
+		;;; A private helper method that can be used to call any GET operation that
+		;;; returns a collection of Employee objects.
+		;;; </summary>
+		;;; <param name="url">Trailing part of URL that identifies the operation to call</param>
+		;;; <returns>Collection of Employee objects</returns>
+		private async method doGetMultiple, @Task<List<Employee>>
+			required in url, string
+		proc
+			disposable data webclient = new HttpClient()
+			disposable data request = new HttpRequestMessage()
+			request.RequestUri = new Uri(String.Format("{0}{1}",baseUrl,url))
+			request.Method = HttpMethod.Get
+			disposable data response = await webclient.SendAsync(request)
+
+			if (response.StatusCode == HttpStatusCode.NotFound)
+				mreturn new List<Employee>()
+
+			data json = await response.Content.ReadAsStringAsync()
+			mreturn JsonConvert.DeserializeObject<List<Employee>>(json)
+		endmethod
+
+		;;; <summary>
+		;;; Returns a collection of all employees in a specified state.
+		;;; </summary>
+		;;; <param name="state">Two-digit US state code</param>
+		;;; <returns>Collection of Employee objects</returns>
+		public async method GetEmployeesInState, @Task<List<Employee>>
+			required in state, string
+		proc
+			data url = String.Format("state/{0}",state)
+			mreturn await doGetMultiple(url)
+		endmethod
+
+	endclass
+
+
+endnamespace
