@@ -122,7 +122,7 @@ namespace <NAMESPACE>
                 end
                 catch (e, @DuplicateException)
                 begin
-                    response = RepositoryResult.DuplicateKey
+                    response = RepositoryResult.BadRequest
                 end
                 endtry
             end
@@ -161,11 +161,11 @@ namespace <NAMESPACE>
                 end
                 catch (e, @DuplicateException)
                 begin
-                    response = RepositoryResult.DuplicateKey
+                    response = RepositoryResult.BadRequest
                 end
                 catch (e, @KeyNotSameException)
                 begin
-                    response = RepositoryResult.KeyChange
+                    response = RepositoryResult.BadRequest
                 end
                 endtry
             end

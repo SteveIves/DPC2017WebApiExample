@@ -73,7 +73,7 @@ namespace WebApiServices.Models
         proc
             results = new List<Employee>()
             data employeeRec, strEmployee
-			foreach employeeRec in new Select(new From(fileSpec,employeeRec),(NoCaseWhere)((employeeRec.LAST_NAME==aLastName)))
+            foreach employeeRec in new Select(new From(fileSpec,employeeRec),(NoCaseWhere)((employeeRec.LAST_NAME==aLastName)))
                 results.Add(new Employee(employeeRec))
             mreturn results.Count > 0 ? RepositoryResult.Success : RepositoryResult.NotFound
         endmethod
@@ -90,7 +90,7 @@ namespace WebApiServices.Models
         proc
             results = new List<Employee>()
             data employeeRec, strEmployee
-			foreach employeeRec in new Select(new From(fileSpec,employeeRec),(NoCaseWhere)((employeeRec.STATE==aState)))
+            foreach employeeRec in new Select(new From(fileSpec,employeeRec),(NoCaseWhere)((employeeRec.STATE==aState)))
                 results.Add(new Employee(employeeRec))
             mreturn results.Count > 0 ? RepositoryResult.Success : RepositoryResult.NotFound
         endmethod
@@ -107,7 +107,7 @@ namespace WebApiServices.Models
         proc
             results = new List<Employee>()
             data employeeRec, strEmployee
-			foreach employeeRec in new Select(new From(fileSpec,employeeRec),(NoCaseWhere)((employeeRec.ZIP==aZip)))
+            foreach employeeRec in new Select(new From(fileSpec,employeeRec),(NoCaseWhere)((employeeRec.ZIP==aZip)))
                 results.Add(new Employee(employeeRec))
             mreturn results.Count > 0 ? RepositoryResult.Success : RepositoryResult.NotFound
         endmethod
@@ -154,7 +154,7 @@ namespace WebApiServices.Models
                 end
                 catch (e, @DuplicateException)
                 begin
-                    response = RepositoryResult.DuplicateKey
+                    response = RepositoryResult.BadRequest
                 end
                 endtry
             end
@@ -193,11 +193,11 @@ namespace WebApiServices.Models
                 end
                 catch (e, @DuplicateException)
                 begin
-                    response = RepositoryResult.DuplicateKey
+                    response = RepositoryResult.BadRequest
                 end
                 catch (e, @KeyNotSameException)
                 begin
-                    response = RepositoryResult.KeyChange
+                    response = RepositoryResult.BadRequest
                 end
                 endtry
             end

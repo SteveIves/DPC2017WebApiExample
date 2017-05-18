@@ -56,7 +56,7 @@ namespace WebApiServices.Models
         proc
             results = new List<Department>()
             data departmentRec, strDepartment
-            foreach departmentRec in new Select(new From(fileSpec,departmentRec),(Where)((departmentRec.MANAGER==aManager)))
+            foreach departmentRec in new Select(new From(fileSpec,departmentRec),(NoCaseWhere)((departmentRec.MANAGER==aManager)))
                 results.Add(new Department(departmentRec))
             mreturn results.Count > 0 ? RepositoryResult.Success : RepositoryResult.NotFound
         endmethod
@@ -103,7 +103,7 @@ namespace WebApiServices.Models
                 end
                 catch (e, @DuplicateException)
                 begin
-                    response = RepositoryResult.DuplicateKey
+                    response = RepositoryResult.BadRequest
                 end
                 endtry
             end
@@ -142,11 +142,11 @@ namespace WebApiServices.Models
                 end
                 catch (e, @DuplicateException)
                 begin
-                    response = RepositoryResult.DuplicateKey
+                    response = RepositoryResult.BadRequest
                 end
                 catch (e, @KeyNotSameException)
                 begin
-                    response = RepositoryResult.KeyChange
+                    response = RepositoryResult.BadRequest
                 end
                 endtry
             end

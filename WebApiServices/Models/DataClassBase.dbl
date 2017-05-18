@@ -4,8 +4,7 @@ namespace WebApiServices.Models
         Success
         NotFound
         Exists
-        DuplicateKey
-        KeyChange
+		BadRequest
     endenum
 
     public abstract class DataClassBase

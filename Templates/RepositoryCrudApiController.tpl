@@ -143,10 +143,8 @@ namespace <NAMESPACE>
             using (dataRepository.Update(<structureName>Obj)) select
             (RepositoryResult.NotFound),
                 mreturn Request.CreateResponse(HttpStatusCode.NotFound)
-            (RepositoryResult.DuplicateKey),
-                mreturn Request.CreateErrorResponse(HttpStatusCode.BadRequest,"Invalid duplicate key value!")
-            (RepositoryResult.KeyChange),
-                mreturn Request.CreateErrorResponse(HttpStatusCode.BadRequest,"Invalid key value change!")
+            (RepositoryResult.BadRequest),
+                mreturn Request.CreateErrorResponse(HttpStatusCode.BadRequest,"Invalid data!")
             endusing
 
             mreturn Request.CreateResponse(HttpStatusCode.OK)

@@ -7,8 +7,7 @@ namespace <NAMESPACE>
         Success
         NotFound
         Exists
-        DuplicateKey
-        KeyChange
+		BadRequest
     endenum
 
     public abstract class DataClassBase
