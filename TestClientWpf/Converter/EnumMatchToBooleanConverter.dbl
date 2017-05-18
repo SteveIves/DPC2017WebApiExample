@@ -2,7 +2,7 @@
 import System.Globalization
 import System.Windows.Data
 
-namespace TestClientWpf
+namespace TestClientWpf.Converter
 
 	public class EnumMatchToBooleanConverter implements IValueConverter
 

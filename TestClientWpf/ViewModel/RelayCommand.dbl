@@ -2,7 +2,7 @@
 import System.Windows.Input
 import System.Diagnostics
 
-namespace TestClientWpf
+namespace TestClientWpf.ViewModel
 
 	;;;<summary>
 	;;;A command whose sole purpose is to relay its functionality to other objects by invoking delegates. The

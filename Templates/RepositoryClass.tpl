@@ -74,7 +74,7 @@ namespace <NAMESPACE>
         proc
             results = new List<<StructureName>>()
             data <structureName>Rec, str<StructureName>
-            foreach <structureName>Rec in new Select(new From(fileSpec,<structureName>Rec),(Where)(<SEGMENT_LOOP>(<structureName>Rec.<SEGMENT_NAME>==a<SegmentName>)<&&></SEGMENT_LOOP>))
+            foreach <structureName>Rec in new Select(new From(fileSpec,<structureName>Rec),(NoCaseWhere)(<SEGMENT_LOOP>(<structureName>Rec.<SEGMENT_NAME>==a<SegmentName>)<&&></SEGMENT_LOOP>))
                 results.Add(new <StructureName>(<structureName>Rec))
             mreturn results.Count > 0 ? RepositoryResult.Success : RepositoryResult.NotFound
         endmethod

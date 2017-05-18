@@ -2,8 +2,10 @@
 import System.Collections.ObjectModel
 import System.Windows.Input
 import System.Windows
+import TestClientWpf.Model
+import TestClientWpf.Tools
 
-namespace TestClientWpf
+namespace TestClientWpf.ViewModel
 
 	public enum EmployeeSearchMode
 		All

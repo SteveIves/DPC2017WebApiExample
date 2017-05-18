@@ -1,12 +1,13 @@
 
+import Newtonsoft.Json
 import System
 import System.Net
 import System.Net.Http
 import System.Collections.ObjectModel
 import System.Threading.Tasks
-import Newtonsoft.Json
+import TestClientWpf.Model
 
-namespace TestClientWpf
+namespace TestClientWpf.Tools
 
 	;;; <summary>
 	;;; This is an example of a class that implements client functionality to an Asp .NET Web API service.

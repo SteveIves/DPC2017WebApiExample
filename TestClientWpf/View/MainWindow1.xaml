@@ -1,21 +1,22 @@
 ﻿<Window
-    x:Class="TestClientWpf.MainWindow1"
+    x:Class="TestClientWpf.View.MainWindow1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:TestClientWpf"
+    xmlns:converter="clr-namespace:TestClientWpf.Converter"
+    xmlns:viewModel="clr-namespace:TestClientWpf.ViewModel"
     Title="Web Service Test Client" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
-            <local:EnumMatchToBooleanConverter x:Key="enumConverter" />
+            <converter:EnumMatchToBooleanConverter x:Key="enumConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml"/>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     
     <Window.DataContext>
-        <local:EmployeesViewModel/>
+        <viewModel:EmployeesViewModel/>
     </Window.DataContext>
 
     <Grid>

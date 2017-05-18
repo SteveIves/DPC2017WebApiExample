@@ -12,9 +12,9 @@ import System.Windows.Shapes
 import System.Windows.Media
 import System.Windows.Media.Imaging
 import System.Windows.Navigation
+import TestClientWpf.ViewModel
 
-
-namespace TestClientWpf
+namespace TestClientWpf.View
 
     public partial class MainWindow1 extends Window
     
